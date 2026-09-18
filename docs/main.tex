@@ -1,0 +1,247 @@
+% =====================================================================
+%  УХААЛАГ COFFEESHOP-ЫН NFC СУУРИЛСАН ЗАХИАЛГЫН СИСТЕМ
+%  Төслийн тайлан
+%
+%  Компайл: xelatex main.tex (2 удаа) — MiKTeX эсвэл TeX Live дээр =====================================================================
+\documentclass[12pt,a4paper]{report}
+
+% ---------------------- Фонт (кирилл дэмжлэгтэй) ----------------------
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}[Scale=0.92]
+
+% ---------------------- Хуудасны тохиргоо ----------------------
+\usepackage[a4paper,top=20mm,bottom=20mm,left=30mm,right=15mm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{2pt}
+
+% ---------------------- Багцууд ----------------------
+\usepackage{graphicx}
+\usepackage{babel}
+\babelprovide[main, import]{mongolian}
+\tolerance=2000
+\emergencystretch=2em
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,backgrounds}
+\usepackage[hidelinks]{hyperref}
+
+% ---------------------- Монгол гарчгууд ----------------------
+\renewcommand{\contentsname}{АГУУЛГА}
+\renewcommand{\listfigurename}{ЗУРГИЙН ЖАГСААЛТ}
+\renewcommand{\listtablename}{ХҮСНЭГТИЙН ЖАГСААЛТ}
+\renewcommand{\figurename}{Зураг}
+\renewcommand{\tablename}{Хүснэгт}
+\renewcommand{\chaptername}{Бүлэг}
+\renewcommand{\bibname}{НОМ ЗҮЙ}
+
+% ---------------------- Гарчгийн хэв маяг ----------------------
+\titleformat{\chapter}[display]
+  {\centering\normalfont\bfseries}
+  {\chaptertitlename~\thechapter}{14pt}{\Large\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-10pt}{24pt}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\titlespacing*{\subsection}{0pt}{10pt}{6pt}
+
+% ---------------------- Хуудасны дугаар (доод төвд) ----------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+\fancypagestyle{plain}{%
+  \fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\thepage}}
+
+% ---------------------- Caption ----------------------
+\captionsetup{font=small, labelfont=bf}
+\captionsetup[table]{position=above}
+
+% ---------------------- TikZ хэв маяг ----------------------
+\tikzset{
+  uc/.style={draw, ellipse, align=center, minimum width=2.4cm,
+             minimum height=0.8cm, font=\small, fill=white},
+  layer/.style={draw, rounded corners=3mm, fill=gray!8, inner sep=9pt},
+  layerlbl/.style={font=\small\bfseries, anchor=north west},
+  svc/.style={draw, rounded corners=1.5mm, fill=white,
+              minimum height=0.85cm, align=center, font=\small},
+  ext/.style={svc, fill=orange!15, dashed},
+  dbx/.style={svc, fill=blue!8},
+  ent/.style={draw, align=left, font=\small, fill=blue!4, inner sep=5pt},
+  msg/.style={-{Stealth[length=2.6mm]}, font=\scriptsize},
+  ret/.style={-{Stealth[length=2.6mm]}, dashed, font=\scriptsize},
+  note/.style={draw, fill=yellow!20, font=\scriptsize, align=left, inner sep=3pt},
+  flowbox/.style={draw, rounded corners=1.5mm, fill=blue!8,
+                  minimum height=0.95cm, align=center, font=\small},
+  st/.style={draw, rounded corners=1mm, fill=green!10,
+             minimum height=0.7cm, font=\small\strut},
+}
+
+% Хэрэглэгчийн тохиолдлын диаграмм дахь актор (хүн) зурах
+\newcommand{\actor}[4]{%
+  \begin{scope}[shift={(#2,#3)}]
+    \draw[thick] (0,0.18) circle (0.17);
+    \draw[thick] (0,0.01) -- (0,-0.52);
+    \draw[thick] (-0.26,-0.16) -- (0.26,-0.16);
+    \draw[thick] (0,-0.52) -- (-0.2,-0.84);
+    \draw[thick] (0,-0.52) -- (0.2,-0.84);
+    \node[font=\small\bfseries, anchor=north, align=center] at (0,-0.9) {#4};
+    \coordinate (#1) at (0,-0.24);
+  \end{scope}%
+}
+
+\hypersetup{
+  pdftitle={Ухаалаг кофе шопын NFC-д суурилсан захиалгын систем — Төслийн төлөвлөгөө},
+  pdfauthor={М.Мөнхдорж, Ү.Тамир, Б.Эрдэнэбаяр},
+}
+
+\begin{document}
+
+% =====================================================================
+%  НҮҮР ХУУДАС
+% =====================================================================
+\begin{titlepage}
+  \centering
+  {\large\bfseries ШИНЭ МОНГОЛ ТЕХНОЛОГИЙН ИХ СУРГУУЛЬ (ШМТИС)}\\[2.2cm]
+
+  % Энд сургуулийн логоо хийнэ үү:
+  % \includegraphics[width=3.2cm]{figures/logo.png}\\[2.2cm]
+
+  {\Large\bfseries «УХААЛАГ КОФЕ ШОПЫН NFC-Д СУУРИЛСАН\\[6pt] ЗАХИАЛГЫН СИСТЕМ»}\\[12pt]
+  {\normalsize --- Төслийн төлөвлөгөө ---}\\[2.2cm]
+
+  \begin{tabular}{@{}p{3.2cm}@{}p{8.4cm}@{}}
+    \textbf{Гүйцэтгэсэн:} & М.Мөнхдорж, Ү.Тамир, Б.Эрдэнэбаяр \\[10pt]
+    \textbf{Удирдсан:}    &  ................................ \\
+
+  \end{tabular}
+
+  \vfill
+  {\normalsize Улаанбаатар хот}\\[2pt]
+  {\normalsize 2026 он}
+\end{titlepage}
+
+% =====================================================================
+%  УГТГАЛ ХЭСЭГ (роман тоолол)
+% =====================================================================
+\pagenumbering{roman}
+
+\input{chapters/00-xuraangui}
+
+\tableofcontents
+\clearpage
+
+% =====================================================================
+%  ҮНДСЭН ХЭСЭГ (араб тоолол, 1-ээс)
+% =====================================================================
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/ch1-taniltsuulga}
+\input{chapters/ch2-shinjilgee}
+\input{chapters/ch3-marketing}
+\input{chapters/ch4-udirdlaga}
+\input{chapters/ch5-zagvar}
+\input{chapters/ch6-sankhuu}
+\input{chapters/ch7-dugnelt}
+
+% =====================================================================
+%  НОМ ЗҮЙ
+% =====================================================================
+\addcontentsline{toc}{chapter}{Ном зүй}
+\begin{thebibliography}{19}
+
+\bibitem{iso14443}
+ISO/IEC 14443, \textit{Identification cards --- Contactless integrated circuit
+cards --- Proximity cards}, International Organization for Standardization,
+Geneva.
+
+\bibitem{nfcforum}
+NFC Forum, \textit{NFC Forum Technical Specifications},
+\url{https://nfc-forum.org}.
+
+\bibitem{nxpntag}
+NXP Semiconductors, \textit{NTAG 213/215/216 --- NFC Forum Type 2 Tag compliant
+IC with 144/504/888 bytes user memory}, Product data sheet,
+\url{https://www.nxp.com}.
+
+\bibitem{coskun2012}
+V. Coskun, K. Ok, B. Ozdenizci, \textit{Professional NFC Application
+Development for Android}, Wiley, 2012.
+
+\bibitem{androidnfc}
+Google, \textit{NFC basics}, Android Developers documentation,
+\url{https://developer.android.com/guide/topics/connectivity/nfc}.
+
+\bibitem{corenfc}
+Apple Inc., \textit{Core NFC}, Apple Developer documentation,
+\url{https://developer.apple.com/documentation/corenfc}.
+
+\bibitem{react}
+Meta Open Source, \textit{React --- The library for web and native user
+interfaces}, \url{https://react.dev}.
+
+\bibitem{nestjs}
+NestJS, \textit{A progressive Node.js framework for building efficient,
+reliable and scalable server-side applications}, \url{https://docs.nestjs.com}.
+
+\bibitem{postgres}
+The PostgreSQL Global Development Group, \textit{PostgreSQL Documentation},
+\url{https://www.postgresql.org/docs/}.
+
+\bibitem{docker}
+Docker Inc., \textit{Docker Documentation}, \url{https://docs.docker.com}.
+
+\bibitem{playwright}
+Microsoft, \textit{Playwright --- Reliable end-to-end testing for modern web
+apps}, \url{https://playwright.dev}.
+
+\bibitem{sommerville2016}
+I. Sommerville, \textit{Software Engineering}, 10th ed., Pearson, 2016.
+
+\bibitem{fielding2000}
+R. T. Fielding, \textit{Architectural Styles and the Design of
+Network-based Software Architectures}, PhD dissertation, University of
+California, Irvine, 2000.
+
+\bibitem{rfc9110}
+R. Fielding, M. Nottingham, J. Reschke (Eds.), \textit{HTTP Semantics
+(RFC 9110)}, Internet Engineering Task Force, 2022,
+\url{https://www.rfc-editor.org/rfc/rfc9110}.
+
+\bibitem{owasp}
+OWASP Foundation, \textit{OWASP Top 10:2021 --- The Ten Most Critical
+Web Application Security Risks}, \url{https://owasp.org/Top10}.
+
+\bibitem{pcidss}
+PCI Security Standards Council, \textit{PCI DSS --- Payment Card
+Industry Data Security Standard}, v4.0,
+\url{https://www.pcisecuritystandards.org}.
+
+\bibitem{iso27001}
+ISO/IEC 27001, \textit{Information security, cybersecurity and privacy
+protection --- Information security management systems --- Requirements},
+International Organization for Standardization, Geneva.
+
+\bibitem{githubactions}
+GitHub Inc., \textit{GitHub Actions Documentation},
+\url{https://docs.github.com/actions}.
+
+\bibitem{privacylaw}
+Монгол Улсын Их Хурал, \textit{Хувийн нууцын тухай хууль},
+Улаанбаатар хот.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,192 @@
+% =====================================================================
+%  ТАВ. СИСТЕМИЙН ЗАГВАР
+% =====================================================================
+\chapter{СИСТЕМИЙН ЗАГВАР}
+
+\section{Системийн үйл ажиллагааны урсгал}
+
+Системийн үндсэн урсгал нь NFC уншилтаас эхлээд захиалга хүргэгдэх
+хүртэлх процессыг хамардаг. Энэ хүрээнд хэрэглэгч NFC стикерийг
+утсаар уншуулснаар ширээ автоматаар танигдаж, цэс нээгдэж, захиалга
+өгөх, төлбөр төлөх, захиалгын төлөвийг хянах боломжтой болно.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[node distance=8mm and 7mm]
+    \node[flowbox] (tag) {NFC стикер\\унших};
+    \node[flowbox, below=of tag] (menu) {Цахим цэс нээх\\(ширеэ таних)};
+    \node[flowbox, below=of menu] (cart) {Захиалга бүрдүүлэх};
+    \node[flowbox, below=of cart] (pay) {Төлбөр төлөх\\(QPay/SocialPay/Карт)};
+    \node[flowbox, below=of pay] (kitchen) {Салбар хүлээн авах\\бэлтгэх};
+    \node[flowbox, below=of kitchen] (deliver) {Ширээнд\\хүргэх};
+    \node[st, below=of deliver] (done) {Дуусгав};
+    \draw[-{Stealth[length=2.6mm]}] (tag) -- (menu);
+    \draw[-{Stealth[length=2.6mm]}] (menu) -- (cart);
+    \draw[-{Stealth[length=2.6mm]}] (cart) -- (pay);
+    \draw[-{Stealth[length=2.6mm]}] (pay) -- (kitchen);
+    \draw[-{Stealth[length=2.6mm]}] (kitchen) -- (deliver);
+    \draw[-{Stealth[length=2.6mm]}] (deliver) -- (done);
+    \draw[-{Stealth[length=2.6mm]}, bend right=25]
+      (deliver.west) to node[left, font=\scriptsize] {Төлбөр төлөгдөөгүй}
+      (pay.west);
+  \end{tikzpicture}
+  \caption{Захиалгын үндсэн урсгалын диаграмм}
+  \label{fig:ch5-ursgal}
+\end{figure}
+
+\section{Технологийн архитектур}
+
+Систем нь гурван давхаргат архитектуртай \cite{fielding2000, sommerville2016}:
+
+\begin{itemize}
+  \item \textbf{Клиент давхарга:} Хэрэглэгчийн PWA (React) болон
+        салбарын ажилтны dashboard (React).
+  \item \textbf{Аппликешн давхарга:} NestJS сервер талын код,
+        REST API, WebSocket бодит цагийн мэдэгдэл.
+  \item \textbf{Өгөгдлийн давхарга:} PostgreSQL (үндсэн өгөгдөл),
+        Redis (session, queue, cache).
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[layer] (-0.6,-1.2) rectangle (12.1,1.6);
+    \node[layerlbl] at (-0.5,1.5) {Клиент давхарга};
+    \node[svc] (pwa) at (2.0,0.2) {Хэрэглэгчийн PWA\\(React)};
+    \node[svc] (staff) at (6.0,0.2) {Ажилтны dashboard\\(React)};
+    \node[svc] (admin) at (9.8,0.2) {Админ\\хэсэг};
+
+    \draw[layer] (-0.6,-4.6) rectangle (12.1,-2.2);
+    \node[layerlbl] at (-0.5,-2.3) {Аппликешн давхарга (NestJS)};
+    \node[svc] (api) at (2.0,-3.4) {REST API};
+    \node[svc] (ws) at (5.2,-3.4) {WebSocket\\мэдэгдэл};
+    \node[svc] (pay) at (8.2,-3.4) {Төлбөрийн модуль};
+    \node[ext] (qpay) at (11.0,-3.4) {QPay/SocialPay};
+
+    \draw[layer] (-0.6,-8.0) rectangle (12.1,-5.6);
+    \node[layerlbl] at (-0.5,-5.7) {Өгөгдлийн давхарга};
+    \node[dbx] (pg) at (2.0,-6.8) {PostgreSQL};
+    \node[dbx] (redis) at (5.6,-6.8) {Redis};
+    \node[dbx] (s3) at (9.0,-6.8) {Объект хадгаламж\\(зураг файл)};
+  \end{tikzpicture}
+  \caption{Системийн гурван давхаргат архитектур}
+  \label{fig:ch5-arch}
+\end{figure}
+
+\section{Өгөгдлийн сангийн загвар}
+
+Системийн үндсэн багцууд: \texttt{User}, \texttt{Venue},
+\texttt{Table}, \texttt{MenuCategory}, \texttt{MenuItem}, \texttt{Order},
+\texttt{OrderItem}, \texttt{Payment}, \texttt{NfcTag}, \texttt{AuditLog}.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \node[ent] (user) at (0,0) {\texttt{User}\\--- id, name, phone, email};
+    \node[ent] (venue) at (5.4,0) {\texttt{Venue}\\--- id, name, address};
+    \node[ent] (table) at (10.6,0) {\texttt{Table}\\--- id, venue\_id, no};
+    \node[ent] (nfctag) at (10.6,-1.6) {\texttt{NfcTag}\\--- id, table\_id, uid};
+    \node[ent] (order) at (5.4,-3.0) {\texttt{Order}\\--- id, table\_id, user\_id, status};
+    \node[ent] (orderitem) at (0,-4.4) {\texttt{OrderItem}\\--- id, order\_id, item\_id, qty};
+    \node[ent] (menuitem) at (5.4,-5.8) {\texttt{MenuItem}\\--- id, category\_id, name, price};
+    \node[ent] (payment) at (10.6,-3.0) {\texttt{Payment}\\--- id, order\_id, method, status};
+    \draw[thick] (user) -- (order);
+    \draw[thick] (venue) -- (table);
+    \draw[thick] (table) -- (nfctag);
+    \draw[thick] (table) -- (order);
+    \draw[thick] (order) -- (orderitem);
+    \draw[thick] (orderitem) -- (menuitem);
+    \draw[thick] (order) -- (payment);
+  \end{tikzpicture}
+  \caption{Өгөгдлийн сангийн объект-харилцааны (ER) диаграмм}
+  \label{fig:ch5-er}
+\end{figure}
+
+\section{REST API-ийн тодорхойлолт}
+
+\begin{table}[h]
+  \centering
+  \caption{REST API-ийн үндсэн endpoint-ууд}
+  \label{tab:ch5-api}
+  \small
+  \begin{tabular}{@{}p{2.0cm}p{5.6cm}p{6.4cm}@{}}
+    \toprule
+    \textbf{HTTP} & \textbf{Endpoint} & \textbf{Тайлбар} \\ \midrule
+    GET & \texttt{/api/v1/menu?venue=\{id\}} & Салбарын цэс, ангилал,
+          үнийг авах \\
+    POST & \texttt{/api/v1/orders} & Шинэ захиалга үүсгэх (ширеэний
+           NFC стикерийн uid-ээр) \\
+    GET & \texttt{/api/v1/orders/\{id\}} & Захиалгын төлөв, дэлгэрэнгүй
+          мэдээлэл \\
+    POST & \texttt{/api/v1/payments/intent} & Төлбөрийн санал (intent)
+           үүсгэх \\
+    POST & \texttt{/api/v1/payments/webhook} & Төлбөрийн үйлчилгээ
+           үзүүлэгчийн callback \\
+    PATCH & \texttt{/api/v1/staff/orders/\{id\}} & Ажилтан захиалгын
+            төлөвийг шилжүүлэх \\
+    GET & \texttt{/api/v1/admin/reports} & Орлого, захиалгын тайлан \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Аюулгүй байдлын загвар}
+
+\begin{itemize}
+  \item \textbf{Бүх урсгал HTTPS:} TLS 1.2+ протокол, HSTS header
+        \cite{rfc9110}.
+  \item \textbf{Шошгоны кодчилол:} NFC стикерийн uid-ийг сервер дээр
+        баталгаажуулж, шууд бүртгэлээс хамгаалах.
+  \item \textbf{Хандалтын эрх:} RBAC (role-based access control) --
+        хэрэглэгч, ажилтан, админ гэсэн 3 түвшний эрх
+        \cite{owasp}.
+  \item \textbf{Төлбөрийн мэдээлэл:} Картын мэдээллийг систем
+        хадгалахгүй; төлбөрийн үйлчилгээ үзүүлэгчийн SDK-гаар
+        шууд дамжуулна (PCI DSS-ийн шаардлага хангасан \cite{pcidss}).
+  \item \textbf{Хувийн мэдээлэл:} «Хувийн нууцын тухай» хуулийн
+        дагуу цуглуулсан мэдээллийг зөвхөн үйлчилгээнд шаардлагатай хэмжээнд хадгалж, хугацаа нь болоход устгана
+        \cite{privacylaw}.
+  \item \textbf{Аудит:} Нэвтрэлт, захиалга, төлбөрийн өөрчлөлтийг
+        AuditLog хүснэгтэд хадгалж, гүйлгээний ул мөрийг бүрэн
+        мөшгөх \cite{iso27001}.
+\end{itemize}
+
+\section{Хөгжүүлэлтийн төлөвлөгөө}
+
+Төслийг 6 сарын хугацаанд 4 үе шаттайгаар хэрэгжүүлнэ
+(Хүснэгт~\ref{tab:ch5-tolovlogoo}).
+
+\begin{table}[h]
+  \centering
+  \caption{Хөгжүүлэлтийн үе шатууд}
+  \label{tab:ch5-tolovlogoo}
+  \small
+  \begin{tabular}{@{}p{1.0cm}p{4.6cm}p{3.6cm}p{4.0cm}@{}}
+    \toprule
+    \textbf{№} & \textbf{Үе шат} & \textbf{Хугацаа} & \textbf{Гарц (deliverable)} \\
+    \midrule
+    1 & Шаардлага тодорхойлолт, архитектурын зураглал & 1 -- 2 сар &
+    Шаардлагын баримт, диаграммууд \\
+    2 & Backend болон өгөгдлийн сангийн хөгжүүлэлт & 2 -- 3 сар &
+    REST API, ER бүтэц, төлбөрийн интеграци \\
+    3 & PWA болон ажилтны хэсгийн хөгжүүлэлт & 3 -- 5 сар &
+    Цэс, захиалга, төлбөрийн интерфэйс \\
+    4 & Интеграц, тест, нэвтрүүлэг & 5 -- 6 сар &
+    Бүтээгдэхүүний эхний хувилбар (MVP) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Туршилтын төлөвлөгөө}
+
+\begin{itemize}
+  \item \textbf{Нэгж туршилт:} Backend-ийн үндсэн модулиуд (захиалга
+        үүсгэх, төлбөрийн intent, төлөвийн шилжилт).
+  \item \textbf{Интеграцын туршилт:} NFC → цэс → захиалга → төлбөр →
+        ажилтны хүлээн авалт.
+  \item \textbf{Хэрэглэгчийн туршилт (UAT):} Анхдагч хэрэглэгч кофе шопт 2 -- 4
+        долоо хоногийн турш бодит орчинд турших.
+  \item \textbf{Ачааллын туршилт:} Оройн оргил цагт нэг салбарт
+        200 -- 500 захиалга/цагийн ачааллыг тэсвэрлэх.
+  \item \textbf{Аюулгүй байдлын туршилт:} HTTPS, RBAC, webhook
+        баталгаажуулалтын туршилт.
+\end{itemize}

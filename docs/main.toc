@@ -1,0 +1,56 @@
+\babel@toc {mongolian}{}\relax 
+\contentsline {chapter}{Хураангуй}{i}{chapter*.1}%
+\contentsline {chapter}{Abstract}{ii}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}ТӨСЛИЙН ТАНИЛЦУУЛГА}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Төслийн суурь үзүүлэлтүүд}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Төсөл хэрэгжүүлэгчийн тухай}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Төслийн тухай}{1}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Төслийн бүтээгдэхүүний танилцуулга}{1}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Төслийн танилцуулга}{2}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Төслийн үндсэн зорилго, зорилтууд}{3}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Төслийн зорилго, зорилтууд}{3}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Төслийн ач холбогдол}{3}{subsection.1.4.2}%
+\contentsline {chapter}{\numberline {2}НӨХЦӨЛ БАЙДЛЫН ШИНЖИЛГЭЭ}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Макро орчны шинжилгээ}{4}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Улс төрийн нөхцөл байдал, хууль эрхзүйн зохицуулалт}{4}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Хүн ам зүй, нийгэм соёлын хүчин зүйл}{4}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Эдийн засгийн хүчин зүйл}{4}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Микро орчны шинжилгээ}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Өрсөлдөгчийн шинжилгээ}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Хэрэглэгч, зах зээлийн шинжилгээ}{5}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}SWOT шинжилгээ}{6}{subsection.2.2.3}%
+\contentsline {chapter}{\numberline {3}МАРКЕТИНГИЙН ТӨЛӨВЛӨГӨӨ}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Маркетингийн зорилго, зорилтот зах зээл}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Маркетингийн хольц буюу 4P-ийн шинжилгээ}{7}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Product буюу Бүтээгдэхүүн}{7}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Price буюу Үнийн бодлого}{8}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Place буюу Хуваарилалтын суваг}{8}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Promotion буюу Урамшуулал, идэвхжүүлэлт}{8}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Борлуулалтын хүлээгдэж буй үр дүн}{8}{section.3.3}%
+\contentsline {chapter}{\numberline {4}УДИРДЛАГА, ЗОХИОН БАЙГУУЛАЛТ, ХҮНИЙ НӨӨЦИЙН ТӨЛӨВЛӨГӨӨ}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Удирдлага, зохион байгуулалтын бүтэц}{10}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Компанийн ажиллах хүчний тооцоо}{10}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Цалингийн зардлын төлөвлөгөө}{10}{section.4.3}%
+\contentsline {chapter}{\numberline {5}СИСТЕМИЙН ЗАГВАР}{12}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Системийн үйл ажиллагааны урсгал}{12}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Технологийн архитектур}{12}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Өгөгдлийн сангийн загвар}{13}{section.5.3}%
+\contentsline {section}{\numberline {5.4}REST API-ийн тодорхойлолт}{14}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Аюулгүй байдлын загвар}{14}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Хөгжүүлэлтийн төлөвлөгөө}{14}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Туршилтын төлөвлөгөө}{14}{section.5.7}%
+\contentsline {chapter}{\numberline {6}САНХҮҮГИЙН ТӨЛӨВЛӨГӨӨ}{16}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Үйлдвэрлэлийн зардлын тооцоо}{16}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Үйлдвэрлэлийн орлогын тооцоо (Борлуулалтын төлөвлөгөө)}{16}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Орлого, зардлын нэгдсэн тооцоолол}{16}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Хөрөнгө оруулалтын тооцоо}{17}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Хөрөнгө оруулалтын үр ашиг}{17}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Хөрөнгө оруулалтын өгөөж (ROI)}{17}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Хөрөнгө оруулалтыг нөхөх хугацаа}{17}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Зээлийн эргэн төлөлтийн тооцоо}{18}{section.6.6}%
+\contentsline {chapter}{\numberline {7}ТӨСЛИЙН ДҮГНЭЛТ}{19}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Төсөл хэрэгжих урьдчилсан нөхцөл, хүлээх үүрэг}{19}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Төслийн хэрэгжилтээс гарах үр дүн}{19}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Төслийг хэрэгжүүлснээр гарах үр дүн}{19}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Төслийг хэрэгжүүлснээр гарч болох эрсдлээс хамгаалах арга зам}{20}{section.7.4}%
+\contentsline {chapter}{Ном зүй}{20}{table.caption.20}%

@@ -1,0 +1,91 @@
+% =====================================================================
+%  ХУРААНГУЙ (монгол) ба ABSTRACT (англи)
+% =====================================================================
+\chapter*{ХУРААНГУЙ}
+\addcontentsline{toc}{chapter}{Хураангуй}
+
+Энэхүү төслийн ажилд кофе шопын үйлчилгээний урсгалыг автоматжуулсан
+ухаалаг захиалгын системийг NFC стикертэй хамт нэг цогц бүтээгдэхүүн
+болгон боловсруулж, ажиллагаатай кофе шопуудад шууд борлуулах
+бизнесийн төслийн баримт бичгийг бүрэн хэмжээгээр гаргав. Систем нь
+зочин ширээн дээр байрлах NFC стикерийг гар утсаар уншуулснаар цахим
+цэс автоматаар нээгдэж, захиалгаа өгч, төлбөрийг нэг цогц орчинд
+төлснөөр захиалгаа ширээндээ хүргүүлж авах боломжийг олгоно.
+
+Төслийн бизнесийн загвар нь үйлчилгээ үзүүлэх бус, бүтээгдэхүүнийг шууд
+борлуулах зарчимд суурилна: кофе шоп бүрд ширээ тус бүрт нэг удаа NFC
+стикер байршуулж, тухайн кофе шопын цэс болон холбогдох системийг
+тохируулан өгснөөр ханган нийлүүлэлтийн ажил дуусна. Дараа нь кофе
+шоп өөрийн админ эрхээр нэвтрэн цэсээ шинэчлэх -- шинэ бүтээгдэхүүн
+нэмэх, хасах, үнийн өөрчлөлт оруулах боломжтой. Ингэж олон кофе шоптой
+давтан ажиллаж, нэгж борлуулалт бүрээс ашиг олно.
+
+Судалгааны хүрээнд кафе-ийн уламжлалт үйлчилгээний урсгалын бэрхшээлүүдийг
+тодорхойлж, NFC, QR код, өөрөө үйлчлэх терминал (kiosk), аппликешнд
+суурилсан шийдлүүдийг харьцуулан шинжилэв. Харьцуулалтаас үзвэл NFC стикер
+нь ширээг автоматаар таних, нэг алхамаар цэс нээх, гадна орчны нөлөөнд
+тэсвэртэй байх зэрэг давуу талыг өгөх бөгөөд орчин үеийн Android болон
+iPhone утаснууд стикерийг арын дэвсгэртэд (background) унших чадвартай
+тул тусгай аппликешн таталгүйгээр ашиглах боломжтойг харуулав.
+
+Төслийн баримт бичигт төслийн танилцуулга, нөхцөл байдлын шинжилгээ,
+маркетингийн төлөвлөгөө (нэг удаагийн багц үнийн бүтэцтэй), удирдлага,
+зохион байгуулалт болон хүний нөөцийн төлөвлөгөө, системийн загвар,
+санхүүгийн төлөвлөгөө, эрсдэлийн үнэлгээг багтаав. Системийн загварын
+хүрээнд гурван давхаргат (клиент -- аппликешн -- өгөгдөл) архитектур,
+NFC уншилтаас төлбөр баталгаажуулалт хүртэлх урсгалын диаграмм,
+өгөгдлийн сангийн объект-харилцааны (ER) загвар, REST API-ийн
+тодорхойлолт, аюулгүй байдлын загвар, туршилтын төлөвлөгөөг
+багтаав. Хөгжүүлэлтийн технологиор React (PWA), NestJS, PostgreSQL,
+Redis болон Docker-ийг сонгосон. Санхүүгийн урьдчилсан тооцоогоор
+нийт хөрөнгө оруулалт 55.5 сая төгрөг буюу 3 жилийн дотор 171\%-ийн
+хөрөнгө оруулалтын өгөөжтэй (ROI), ойролцоогоор 35 сарын дотор
+бүрэн нөхөгдөхөөр байна.
+
+\noindent\textbf{Түлхүүр үгс:} NFC, ухаалаг захиалгын систем, PWA,
+REST API, төлбөрийн интеграци, бүтээгдэхүүний борлуулалт.
+
+\chapter*{ABSTRACT}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This project report presents the full business documentation for a
+smart ordering system for coffee shops, developed together with an
+NFC sticker as a single product and sold directly to operating coffee
+shops. The system allows a customer to tap their phone on an NFC
+sticker attached to the table, which opens a web-based menu with the
+table automatically identified, place an order, and pay online so
+that the order is delivered directly to their table --- without
+standing in line at the counter.
+
+The business model of the project is product-based direct sales
+rather than a service: for each coffee shop, one NFC sticker is
+installed on every table and the menu and related system are
+configured for that shop, completing the delivery. Afterwards, the
+coffee shop signs in with its own administrator account to update
+its menu --- adding or removing products and changing prices. The
+project earns profit by repeating this delivery across many coffee
+shops.
+
+The report analyses the shortcomings of the traditional counter-service
+workflow and compares NFC-based identification with QR codes,
+self-service kiosks and dedicated mobile applications. The analysis shows
+that NFC stickers provide one-tap access to the menu, reliable table
+identification, and high resilience to environmental conditions, while
+modern Android and iPhone devices support background tag reading without
+installing a dedicated application.
+
+The document contains the project introduction, situation analysis,
+marketing plan with a one-time package pricing structure, management
+and human resources plan, system design, financial plan, and risk
+assessment. The system design covers a three-tier architecture
+(client --- application --- data), a diagram of the NFC-based order
+and payment flow, an entity-relationship model of the database, a REST
+API specification, a security design, and a test plan. React (PWA),
+NestJS, PostgreSQL, Redis and Docker were selected as the
+implementation technology stack. According to the preliminary financial
+estimates, the total investment is 55.5 million MNT, with a three-year
+return on investment (ROI) of 171\% and a full payback period of
+approximately 35 months.
+
+\noindent\textbf{Keywords:} NFC, smart ordering system, PWA, REST API,
+payment integration, product sales.
